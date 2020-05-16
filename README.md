@@ -1,7 +1,7 @@
 # Disk-Sanitizer
 A tool which can wipe any or all attached disks based on include and exclude device name filters. This was designed as a disk data wiper for Solaris, which at the time, did not have a good way to purge data from all disks. It will work with local (internal) disks, SAN storage, SSD Cards, and NVME devices.
 
-It purges data in parallel. It will fork off the desired purge methos for each device and execute the data wipe on each device independently.
+It purges data in parallel. It will fork off the desired purge method for each device and execute the data wipe on each device independently.
 Have a server with hundreds of disks? Not a problem!
 As long as you have the IO bandwidth, it will do the job in the most efficient way possible.
 
