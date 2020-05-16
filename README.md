@@ -1,13 +1,14 @@
 # Disk-Sanitizer
-A tool which can wipe any or all attached disks based on include and exclude device name filters
+A tool which can wipe any or all attached disks based on include and exclude device name filters. This was designed as a disk data wiper for Solaris, which at the time, did not have a good way to purge data from all disks. It will work with local (internal) disks, SAN storage, SSD Cards, and NVME devices.
 
-This was designed as a disk data wiper for Solaris, which at the time, did not have a good way to purge data from all disks.
+It purges data in parallel. It will fork off the desired purge methos for each device and execute the data wipe on each device independently.
+Have a server with hundreds of disks? Not a problem!
+As long as you have the IO bandwidth, it will do the job in the most efficient way possible.
 
-It was inteneded to be executed from a network boot (available from the miniroot). Nowadays, you can boot from a USB device to execute the tool.
+It was intended to be executed from a network boot (available from the miniroot). Nowadays, you can boot from a USB device to execute the tool, or from an NFS or CIFS, share, or whatever you like.
 
 The "normal" method uses Solaris native format/analyze/purge to perform a NIST standard data wipe.
-The "fast" method uses a 3 pass of writes: 1) all zeros, 2) 64k random data writes 3) 128k random data writes. It is significantly faster than the NIST
-Standard, and it should be "good enough".
+The "fast" method uses a 3 pass of writes: 1) all zeros, 2) 64k random data writes 3) 128k random data writes. It is significantly faster than the NIST Standard, and it should be "good enough".
 
 ## Usage
   disk_sanitizer.sh [-x none|disks] [-i disks] [-p] [-f]
