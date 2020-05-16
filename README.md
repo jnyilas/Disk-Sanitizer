@@ -15,9 +15,9 @@ Standard, and it should be "good enough".
   By default all disks detected at boot time are selected for data wipe. You can change this by manipulating the -i (include) and -x (exclude) filters.
   For example, to inlcude all the disks on controller 0, but exclude only c0t7d0, and all the devices on c8; then:
   
-  '''
+```
 disk_sanitizer.sh -i c0 -x c0t7d0 -x c8
-  '''
+```
   
   -f toggles to use the Fast Method
   
