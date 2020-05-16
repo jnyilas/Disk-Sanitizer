@@ -24,4 +24,7 @@ disk_sanitizer.sh -i c0 -x c0t7d0 -x c8
   
   -p automatically powers off the server at the completion of the data wipe
 
-
+## Caution
+** This wll cause data loss!***
+It is expressly designed to do so. Verify the disk list output confirmation before allowing the tool to proceed.
+Signal 15 (control C) is trapped and will kill all forked sub shells.
