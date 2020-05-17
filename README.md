@@ -13,10 +13,10 @@ The "fast" method uses a 3 pass of writes: 1) wite all zeros, 2) 64k blocksize u
 ## Usage
   `disk_sanitizer.sh [-x none|disks] [-i disks] [-p] [-f]`
   
-  `-i`   optional include device filter
-  `-x`   optional exclude device filter
-  `-f`   option to toggle to use the Fast Method
-  `-p`   option to automatically power off the server at the completion of the data wipe
+  -i   optional include device filter
+  -x   optional exclude device filter
+  -f   option to toggle to use the Fast Method
+  -p   option to automatically power off the server at the completion of the data wipe
   
   **By default all disks detected at boot time are selected for data wipe.**
   You can change this by manipulating the -i (include) and -x (exclude) filters.
@@ -27,6 +27,6 @@ The "fast" method uses a 3 pass of writes: 1) wite all zeros, 2) 64k blocksize u
 ```
   
 ### Caution
-** This wll cause data loss!***
+**This will cause data loss!**
 It is expressly designed to do so. Verify the disk list output confirmation before allowing the tool to proceed.
 Signal 15 (control C) is trapped and will kill all forked sub shells, so as to preserve your sanity.
