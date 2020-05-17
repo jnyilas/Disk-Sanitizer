@@ -6,24 +6,27 @@ As long as you have the IO bandwidth, it will do the job in the most efficient w
 
 It was intended to be executed from a network boot (available from the miniroot). Nowadays, you can boot from a USB device to execute the tool, or from an NFS or CIFS, share, or whatever you like.
 
-The "normal" method uses Solaris native [format\(8\)(https://docs.oracle.com/cd/E88353_01/html/E72487/format-8.html)] `analyze/purge` function to perform a NIST Guidelines for Media Sanitization (NIST SP 800-88) compliant data wipe. The downside to this method is that it is extremely slow.
+The "normal" method uses Solaris native [format\(8\)](https://docs.oracle.com/cd/E88353_01/html/E72487/format-8.html) `analyze/purge` function to perform a NIST Guidelines for Media Sanitization (NIST SP 800-88) compliant data wipe. The downside to this method is that it is extremely slow.
+
 The "fast" method uses a 3 pass of writes: 1) wite all zeros, 2) 64k blocksize urandom data overwrite 3) 128k blocksize urandom data overwrite. It is significantly faster than the NIST Standard, and it should be "good enough".
 
 ## Usage
-  disk_sanitizer.sh [-x none|disks] [-i disks] [-p] [-f]
+  `disk_sanitizer.sh [-x none|disks] [-i disks] [-p] [-f]`
   
-  By default all disks detected at boot time are selected for data wipe. You can change this by manipulating the -i (include) and -x (exclude) filters.
-  For example, to include all the disks on controller 0, but exclude only c0t7d0, and all the devices on c8; then:
+  `-i`   optional include device filter
+  `-x`   optional exclude device filter
+  `-f`   option to toggle to use the Fast Method
+  `-p`   option to automatically power off the server at the completion of the data wipe
+  
+  **By default all disks detected at boot time are selected for data wipe.**
+  You can change this by manipulating the -i (include) and -x (exclude) filters.
+  For example, to include all the disks on controllers 0 and 7, but exclude a specific device 0t7d0, and all the devices on controller 8; then:
   
 ```
-disk_sanitizer.sh -i c0 -x c0t7d0 -x c8
+  disk_sanitizer.sh -i c0 -i c7 -x c0t7d0 -x c8
 ```
   
-  -f toggles to use the Fast Method
-  
-  -p automatically powers off the server at the completion of the data wipe
-
-## Caution
+### Caution
 ** This wll cause data loss!***
 It is expressly designed to do so. Verify the disk list output confirmation before allowing the tool to proceed.
-Signal 15 (control C) is trapped and will kill all forked sub shells.
+Signal 15 (control C) is trapped and will kill all forked sub shells, so as to preserve your sanity.
