@@ -6,7 +6,7 @@ As long as you have the IO bandwidth, it will do the job in the most efficient w
 
 It was intended to be executed from a network boot (available from the miniroot). Nowadays, you can boot from a USB device to execute the tool, or from an NFS or CIFS, share, or whatever you like.
 
-The "normal" method uses Solaris native [format(8)(https://docs.oracle.com/cd/E88353_01/html/E72487/format-8.html)] `analyze/purge` function to perform a NIST Guidelines for Media Sanitization (NIST SP 800-88) compliant data wipe. The downside to this method is that it is extremely slow.
+The "normal" method uses Solaris native [format\(8\)(https://docs.oracle.com/cd/E88353_01/html/E72487/format-8.html)] `analyze/purge` function to perform a NIST Guidelines for Media Sanitization (NIST SP 800-88) compliant data wipe. The downside to this method is that it is extremely slow.
 The "fast" method uses a 3 pass of writes: 1) wite all zeros, 2) 64k blocksize urandom data overwrite 3) 128k blocksize urandom data overwrite. It is significantly faster than the NIST Standard, and it should be "good enough".
 
 ## Usage
